@@ -1,14 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.collections.*?>
+<?import java.lang.*?>
+<?import java.net.URL?>
 
-<VBox alignment="CENTER" prefHeight="342.0" prefWidth="540.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finalproject.HelloController">
+
+
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.finalproject.HelloController"
+          alignment="center" hgap="10" vgap="10" styleClass="root">
+    <padding><Insets top="25" right="25" bottom="25" left="25" /></padding>
+<VBox alignment="CENTER" prefHeight="342.0" prefWidth="540.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" >
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
     <Label fx:id="welcomeText" />
-    <Button onAction="#onHelloButtonClick" onDragDropped="#onHelloButtonClick" prefHeight="54.0" prefWidth="151.0" text="Upload Image" />
+
+    <Button onAction="#buttonClicked" onDragDropped="#buttonClicked" prefHeight="54.0" prefWidth="151.0" text="Upload Image" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <ImageView fx:id="imgview"
+               pickOnBounds="true" preserveRatio="true"
+               GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+
+    <Text fx:id="propertyText" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+    <Label text="Select new format:"
+           GridPane.columnIndex="0"  GridPane.rowIndex="3"/>
+    <ComboBox fx:id="imageCombo"
+              GridPane.columnIndex="1"  GridPane.rowIndex="3"
+              promptText="select" >
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="PNG" />
+                <String fx:value="JPG" />
+                <String fx:value="GIF" />
+                <String fx:value="BMP" />
+                <String fx:value="TIFF" />
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <Label text="Optional, change color: "  GridPane.columnIndex="0"  GridPane.rowIndex="4"/>
+    <ComboBox fx:id="colorCombo" GridPane.columnIndex="1"  GridPane.rowIndex="4"
+              promptText="select">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="blue" />
+                <String fx:value="red" />
+                <String fx:value="green" />
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <Button fx:id="downloadButton" text="Download converted photo"
+            GridPane.columnIndex="0" GridPane.rowIndex="5"
+            onAction="#buttonClickedTwo">
+    </Button>
+    <Text fx:id="downloadTips" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+
+    <stylesheets>
+        <URL value="@sample.css" />
+    </stylesheets>
 </VBox>
+</GridPane>
