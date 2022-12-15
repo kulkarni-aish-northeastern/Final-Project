@@ -14,11 +14,10 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 public class HelloController implements overridden {
     @FXML
-    ImageView imgview;
+    ImageView imageView;
     @FXML
     Text propertyText;
     @FXML
@@ -30,34 +29,38 @@ public class HelloController implements overridden {
     private File selectedFile;
 
     @Override
+    //Interface method
     public void setImage() {
-        imgview = new ImageView();
+        imageView = new ImageView();
     }
 
     //Handle Event: Upload Button
     @FXML
-    private void buttonClicked(ActionEvent event){
+    private void uploadButton(ActionEvent event){
         FileChooser fileChooser = new FileChooser();
+        //Set extension filter
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("All Images", "*.*"),
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png")
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("JPEG", "*.jpeg")
         );
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        //Show open file dialog
         selectedFile = fileChooser.showOpenDialog(null);
 
 
         Image img = new Image(selectedFile.toURI().toString());
-        
-        imgview.setImage(img);
-        imgview.setFitHeight(100);
-        imgview.setFitWidth(100);
-        propertyText.setText("Width: "+ imgview.getFitWidth() + ", Height: " + imgview.getFitHeight());
+
+        imageView.setImage(img);
+        imageView.setFitHeight(100);
+        imageView.setFitWidth(100);
+        propertyText.setText("Width: "+ imageView.getFitWidth() + ", Height: " + imageView.getFitHeight());
     }
 
     //Handle Event: Download Button
     @FXML
-    private void buttonClickedTwo(ActionEvent event){
+    private void downloadButton(ActionEvent event){
         try {
             //-----Color filter-----------------
 
@@ -68,19 +71,19 @@ public class HelloController implements overridden {
                     ColorAdjust colorAdjust = new ColorAdjust();
                     double hue = targetColor.getHue();
                     colorAdjust.setHue(hue);
-                    imgview.setEffect(colorAdjust);
+                    imageView.setEffect(colorAdjust);
                 }
                 //red filter
                 if (colorCombo.getValue().equals("red")) {
                     ColorAdjust colorAdjust = new ColorAdjust();
                     colorAdjust.setHue(-0.2);
-                    imgview.setEffect(colorAdjust);
+                    imageView.setEffect(colorAdjust);
                 }
                 //green filter
                 if (colorCombo.getValue().equals("green")) {
                     ColorAdjust colorAdjust = new ColorAdjust();
                     colorAdjust.setHue(0.4);
-                    imgview.setEffect(colorAdjust);
+                    imageView.setEffect(colorAdjust);
                 }
             }
 
@@ -92,17 +95,14 @@ public class HelloController implements overridden {
             if (imageCombo.getValue().equals("JPG")){
                 ImageIO.write(image, "jpg", new File( "converted.jpg"));
             }
-            if (imageCombo.getValue().equals("GIF")){
-                ImageIO.write(image, "gif",  new File("converted.gif"));
+            if (imageCombo.getValue().equals("JPEG")){
+                ImageIO.write(image, "gif",  new File("converted.jpeg"));
             }
-            if (imageCombo.getValue().equals("BMP")){
-                ImageIO.write(image, "bmp",  new File( "converted.bmp"));
-            }
-            if (imageCombo.getValue().equals("TIFF")){
-                ImageIO.write(image, "tiff",  new File("converted.tiff"));
-            }
+
             downloadTips.setText("Download successfully");
-        }catch (IOException e){
+        }
+        //Exception Handling
+        catch (IOException e){
             downloadTips.setText("Download failed! Try another image.");
             e.printStackTrace();
         }

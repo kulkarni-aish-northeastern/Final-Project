@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.GridPane?>
+<!--?import javafx.scene.layout.GridPane?-->
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.ComboBox?>
+<!--?import javafx.scene.control.ComboBox?-->
 <?import javafx.scene.text.Text?>
 <?import javafx.collections.*?>
 <?import java.lang.*?>
-<?import java.net.URL?>
+<!--?import java.net.URL?-->
 
 
 
@@ -22,8 +22,8 @@
 
     <Label fx:id="welcomeText" />
 
-    <Button onAction="#buttonClicked" onDragDropped="#buttonClicked" prefHeight="54.0" prefWidth="151.0" text="Upload Image" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <ImageView fx:id="imgview"
+    <Button onAction="#uploadButton" onDragDropped="#uploadButton" prefHeight="54.0" prefWidth="151.0" text="Upload Image" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <ImageView fx:id="imageView"
                pickOnBounds="true" preserveRatio="true"
                GridPane.columnIndex="0" GridPane.rowIndex="2"/>
 
@@ -38,9 +38,7 @@
             <FXCollections fx:factory="observableArrayList">
                 <String fx:value="PNG" />
                 <String fx:value="JPG" />
-                <String fx:value="GIF" />
-                <String fx:value="BMP" />
-                <String fx:value="TIFF" />
+                <String fx:value="JPEG" />
             </FXCollections>
         </items>
     </ComboBox>
@@ -59,12 +57,10 @@
 
     <Button fx:id="downloadButton" text="Download converted photo"
             GridPane.columnIndex="0" GridPane.rowIndex="5"
-            onAction="#buttonClickedTwo">
+            onAction="#downloadButton">
     </Button>
     <Text fx:id="downloadTips" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
 
-    <stylesheets>
-        <URL value="@sample.css" />
-    </stylesheets>
+
 </VBox>
 </GridPane>
